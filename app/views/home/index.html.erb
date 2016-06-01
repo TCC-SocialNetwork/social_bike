@@ -1,0 +1,4 @@
+<h1>Bem vindo! <%= current_user.name %></h1>
+
+<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+<%= link_to "Atualizar", edit_user_registration_path %>

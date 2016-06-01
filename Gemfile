@@ -45,3 +45,8 @@ group :development do
   gem 'spring'
 end
 
+gem 'social_framework'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.4'
+end
