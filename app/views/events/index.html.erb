@@ -1,0 +1,13 @@
+<h1>Meus eventos</h1>
+
+
+<table>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= event.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
