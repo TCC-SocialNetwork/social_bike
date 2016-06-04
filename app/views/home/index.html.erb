@@ -1,4 +1,92 @@
 <h1>Bem vindo! <%= current_user.name %></h1>
 
+<%= form_tag("/search") do %>
+  <%= label_tag(:search, "Pesquisar:") %>
+  <%= text_field_tag(:search, @search) %>
+  <%= submit_tag("Pesquisar") %>
+  <% unless @users.empty? and @events.empty? %>
+  	<%= submit_tag("Continuar") %>
+  <% end %>
+<% end %>
+
+<% unless @users.nil? or @users.empty? %>
+<h1>Usuários</h1>
+<table>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Amigo', add_friend_path(user), method: :post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<% unless @events.nil? or @events.empty? %>
+<h1>Eventos</h1>
+<table>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<% unless @friends.nil? or @friends.empty? %>
+<h1>Amigos</h1>
+<table>
+  <tbody>
+    <% @friends.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Remover Amigo', remove_friend_path(user), method: :post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<% unless @requests_friendship.nil? or @requests_friendship.empty? %>
+<h1>Pedidos de Amizade</h1>
+<table>
+  <tbody>
+    <% @requests_friendship.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Aceitar', accept_friend_path(user), method: :post %></td>
+        <td><%= link_to 'Recusar', remove_friend_path(user), method: :post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<% unless @requests_open.nil? or @requests_open.empty? %>
+<h1>Aguardando aceitação</h1>
+<table>
+  <tbody>
+    <% @requests_open.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Cancelar', remove_friend_path(user), method: :post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
 <%= link_to "Sair", destroy_user_session_path, :method => :delete %>
 <%= link_to "Atualizar", edit_user_registration_path %>
+<%= link_to "Criar Evento", edit_user_registration_path %>
