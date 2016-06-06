@@ -1,14 +1,5 @@
 <h1>Bem vindo! <%= current_user.name %></h1>
 
-<%= form_tag("/search") do %>
-  <%= label_tag(:search, "Pesquisar:") %>
-  <%= text_field_tag(:search, @search) %>
-  <%= submit_tag("Pesquisar") %>
-  <% unless @users.empty? and @events.empty? %>
-  	<%= submit_tag("Continuar") %>
-  <% end %>
-<% end %>
-
 <% unless @users.nil? or @users.empty? %>
 <h1>Usuários</h1>
 <table>
