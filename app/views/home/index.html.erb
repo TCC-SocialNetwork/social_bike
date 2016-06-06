@@ -87,6 +87,22 @@
 </table>
 <% end %>
 
+<% unless @friends_suggest.nil? or @friends_suggest.empty? %>
+<h1>Sugeridos</h1>
+<table>
+  <tbody>
+    <% @friends_suggest.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Amigo', add_friend_path(user), method: :post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
 <%= link_to "Sair", destroy_user_session_path, :method => :delete %>
 <%= link_to "Atualizar", edit_user_registration_path %>
 <%= link_to "Criar Evento", new_event_path %>

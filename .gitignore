@@ -36,3 +36,4 @@ bower.json
 
 Gemfile.lock
 db/schema.rb
+script_users.rb

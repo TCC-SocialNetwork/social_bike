@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     @users ||= Array.new
     @events ||= Array.new
     @friends = current_user.relationships("friend")
+    @friends_suggest = current_user.graph.suggest_relationships("friend")
     @requests_friendship = current_user.relationships("friend", false, "other")
     @requests_open = current_user.relationships("friend", false, "self")
   end

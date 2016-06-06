@@ -50,3 +50,6 @@ gem 'social_framework'
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'
 end
+
+gem 'twitter-bootstrap-rails'
+gem 'mysql2'
