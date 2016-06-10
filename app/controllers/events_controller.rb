@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:enter, :show, :invite, :remove_participant, :accept_invitation]
-  before_action :set_user, only: [:invite, :remove_participant]
+  before_action :set_event, only: [:enter, :show, :invite, :remove_participant, :accept_invitation, :make_admin]
+  before_action :set_user, only: [:invite, :remove_participant, :make_admin]
   before_action :authenticate_user!
 
   def show
@@ -9,8 +9,10 @@ class EventsController < ApplicationController
     @not_confirmed_users = @event.users(false)
     @is_in_event = (@confirmed_users.include? current_user)
     @is_invited = (@not_confirmed_users.include? current_user)
+    @administrators = @event.users(true, "admin")
 
     @friends = @friends - @confirmed_users - @not_confirmed_users
+    @confirmed_users = @confirmed_users - @administrators
   end
 
   # GET /foos/new
@@ -57,14 +59,18 @@ class EventsController < ApplicationController
   end
 
   def accept_invitation
-    puts "............................"
-    puts "............................"
-    puts "............................"
-    puts "............................"
     if current_user.schedule.confirm_event @event
       redirect_to event_url(@event), notice: "Você está participando deste evento!"
     else
       redirect_to event_url(@event), alert: "Você não pode participar deste evento!"
+    end
+  end
+
+  def make_admin
+    if @event.change_participant_role current_user, @user, :make_admin
+      redirect_to event_url(@event), notice: "Participante tornou-se Administrador!"
+    else
+      redirect_to event_url(@event), alert: "Participante não pôde se tornar Administrador!"
     end
   end
 

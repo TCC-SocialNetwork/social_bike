@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   post 'invite/:id/:user_id', to: 'events#invite', as: :invite
   post 'remove_participant/:id/:user_id', to: 'events#remove_participant', as: :remove_participant
   post 'accept_invitation/:id', to: 'events#accept_invitation', as: :accept_invitation
+  post 'make_admin/:id/:user_id', to: 'events#make_admin', as: :make_admin
 end

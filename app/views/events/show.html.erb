@@ -12,6 +12,20 @@
   <%= link_to "Entrar", enter_in_event_path(@event), method: :post %>
 <% end %>
 
+<% unless @administrators.nil? or @administrators.empty? %>
+  <h1>Administradores</h1>
+  <table>
+    <tbody>
+      <% @administrators.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Remover', remove_participant_path(@event, user), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 <% unless @confirmed_users.nil? or @confirmed_users.empty? %>
   <h1>Participantes</h1>
   <table>
@@ -20,6 +34,7 @@
         <tr>
           <td><%= user.name %></td>
           <td><%= link_to 'Remover', remove_participant_path(@event, user), method: :post %></td>
+          <td><%= link_to 'Tornar Administrador', make_admin_path(@event, user), method: :post %></td>
         </tr>
       <% end %>
     </tbody>
