@@ -45,7 +45,7 @@ group :development do
   gem 'spring'
 end
 
-gem 'social_framework'
+gem 'social_framework', path: '../social_framework'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'

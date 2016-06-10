@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<p>
+  <strong>String:</strong>
+  <%= @event.title %>
+</p>
+
+<% if @is_invited %>
+  <%= link_to "Aceitar Convite", accept_invitation_path(@event), method: :post %>
+<% elsif not @is_in_event %>
+  <%= link_to "Entrar", enter_in_event_path(@event), method: :post %>
+<% end %>
+
+<% unless @confirmed_users.nil? or @confirmed_users.empty? %>
+  <h1>Participantes</h1>
+  <table>
+    <tbody>
+      <% @confirmed_users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Remover', remove_participant_path(@event, user), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% unless @not_confirmed_users.nil? or @not_confirmed_users.empty? %>
+  <h1>Aguardando confirmação</h1>
+  <table>
+    <tbody>
+      <% @not_confirmed_users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Remover', remove_participant_path(@event, user), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% unless @friends.nil? or @friends.empty? %>
+  <h1>Convidar Amigos</h1>
+  <table>
+    <tbody>
+      <% @friends.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Convidar', invite_path(@event, user), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

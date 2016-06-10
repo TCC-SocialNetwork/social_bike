@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   devise_for :users, class_name: 'SocialFramework::User',
     controllers: {sessions: 'sessions',
-                  registrations: 'users/registrations',
+                  registrations: 'registrations',
                   passwords: 'users/passwords'}
 
   post :search, to: 'home#search'
@@ -13,5 +13,9 @@ Rails.application.routes.draw do
 
   get :new_event, to: 'events#new'
   post :create_event, to: 'events#create'
-  get :events, to: 'events#index'
+  get 'event/:id', to: 'events#show', as: :event
+  post 'enter_in_event/:id', to: 'events#enter', as: :enter_in_event
+  post 'invite/:id/:user_id', to: 'events#invite', as: :invite
+  post 'remove_participant/:id/:user_id', to: 'events#remove_participant', as: :remove_participant
+  post 'accept_invitation/:id', to: 'events#accept_invitation', as: :accept_invitation
 end
