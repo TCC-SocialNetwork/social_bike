@@ -1,0 +1,50 @@
+<%= form_tag(action: :availabilities_timetables) do %>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @friends.each do |friend| %>
+      <tr>
+        <td><%= check_box_tag "friends[]", friend.id %></td>
+        <td><%= label_tag "friends[]", friend.name %></td>
+
+        <td><%= label_tag :weight, "Peso: " %></td>
+        <td><%= select_tag "weights[#{friend.id}]", options_for_select([ "", "1", "2", "3", "Fixo"]) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="field">
+    <%= label_tag :start_day %><br />
+    <%= date_field_tag :start_day %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :finish_day %><br />
+    <%= date_field_tag :finish_day %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :start_hour %><br />
+    <%= time_field_tag :start_hour %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :finish_hour %><br />
+    <%= time_field_tag :finish_hour %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :slots_size, "Duração:" %><br />
+    <%= number_field_tag :slots_size %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag("Verificar") %>
+  </div>
+
+<% end %>
