@@ -1,0 +1,32 @@
+<%= form_tag(action: :create) do %>
+  <div class="field">
+    <%= label_tag :title %><br />
+    <%= text_field_tag :title, "", autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :origin %><br />
+    <%= text_field_tag :origin, "-15.797780000000001,-47.866920000000007" %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :destination %><br />
+    <%= text_field_tag :destination, "-15.795020000000001,-47.875680000000003" %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :travel_mode %><br />
+    <%= select_tag :travel_mode, options_for_select([ "Bicicleta", "A Pé", "Carro", "Transporte Público"]) %>
+  </div>
+
+  <%= hidden_field_tag :distance %>
+  <%= hidden_field_tag :points %>
+
+  <a href="#" id="view_route">Visualizar</a>
+
+  <div class="actions">
+    <%= submit_tag("Salvar", id: 'save') %>
+  </div>
+<% end %>
+
+<div id="map" style="height: 500px; width: 800px"></div>

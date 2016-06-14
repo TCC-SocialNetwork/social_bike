@@ -23,4 +23,8 @@ Rails.application.routes.draw do
   get :best_timetable, to: 'schedules#best_timetable'
   get :show_timetables, to: 'schedules#show_timetables'
   post :availabilities_timetables, to: 'schedules#availabilities_timetables'
+
+  get :new_route, to: 'routes#new'
+  post :create_route, to: 'routes#create'
+  get 'route/:id', to: 'routes#show', as: :route
 end
