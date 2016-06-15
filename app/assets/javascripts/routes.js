@@ -97,12 +97,19 @@ if($("#map").hasClass("show_route")){
   origin = origin.latitude + ", " + origin.longitude
   var destination = $('.destination').data('destination');
   destination = destination.latitude + ", " + destination.longitude
-  console.log($('.travel').data('travel'));
   var travelMode = getModeOfTravel($('.travel').data('travel'));
 
-  console.log(locations);
-  console.log(origin);
-  console.log(destination);
-  console.log(travelMode);
   request_map(origin, destination, travelMode, locations, callback)
 }
+
+$("#my_friend").change(function(){
+  $.ajax({
+    url: "/friend_routes",
+    type: "POST",
+    data: {"id": $("#my_friend").val()},
+    dataType: "html",
+    success: function(data){
+      $("#friend_routes_div").html(data);
+    }
+  });
+});

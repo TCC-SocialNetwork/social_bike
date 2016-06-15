@@ -27,4 +27,7 @@ Rails.application.routes.draw do
   get :new_route, to: 'routes#new'
   post :create_route, to: 'routes#create'
   get 'route/:id', to: 'routes#show', as: :route
+  get :compare_routes, to: 'routes#compare_routes'
+  post :check_routes, to: 'routes#check_routes'
+  post :friend_routes, to: 'routes#friend_routes'
 end

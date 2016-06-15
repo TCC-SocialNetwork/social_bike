@@ -1,0 +1,19 @@
+<h1> Comparação das rotas </h1>
+
+<% if(@compatibility[:compatible]) %>
+
+  As rotas são compativeis e a rota resultante possui <%= @compatibility[:principal_route][:distance] %> metros
+  <div id="map" class="show_route" style="height: 500px; width: 800px"></div>
+
+  <%= content_tag :div, class: "travel", data: {travel: @mode_of_travel} do %>
+  <% end %>
+  <%= content_tag :div, class: "origin", data: {origin: @origin} do %>
+  <% end %>
+  <%= content_tag :div, class: "destination", data: {destination: @destination} do %>
+  <% end %>
+  <%= content_tag :div, class: "locations", data: {locations: @locations} do %>
+  <% end %>
+
+<% else %>
+  As rotas são incompatíveis
+<% end %>

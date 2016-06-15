@@ -25,10 +25,39 @@ class RoutesController < ApplicationController
     @origin = @route.locations.first
     @destination = @route.locations.last
     @mode_of_travel = @route.mode_of_travel
-    puts "**********************************"
-    puts @mode_of_travel
-    puts "**********************************"
     @locations = []
+  end
+
+  def compare_routes
+    @routes = current_user.routes
+    @friends = current_user.relationships
+    @friend_routes = []
+  end
+
+  def check_routes
+    principal_route = SocialFramework::Route.find(params[:my_route])
+    secondary_route = SocialFramework::Route.find(params[:my_friend_route])
+
+    @origin = principal_route.locations.first
+    @destination = principal_route.locations.last
+    @mode_of_travel = principal_route.mode_of_travel
+    
+    route_contex = SocialFramework::RouteHelper::RouteContext.new
+    @compatibility = route_contex.compare_routes(principal_route, secondary_route)
+
+    @locations = []
+    if(@compatibility[:principal_route][:deviation] == :both or @compatibility[:principal_route][:deviation] == :origin)
+      @locations << {location: "#{secondary_route.locations.first.latitude}, #{secondary_route.locations.first.longitude}"}
+    end
+
+    if(@compatibility[:principal_route][:deviation] == :both or @compatibility[:principal_route][:deviation] == :destiny)
+      @locations << {location: "#{secondary_route.locations.last.latitude}, #{secondary_route.locations.last.longitude}"}
+    end
+  end
+
+  def friend_routes
+    @friend_routes = SocialFramework::User.find(params[:id]).routes
+    render partial: "friend_routes", object: @friend_routes
   end
 
   private

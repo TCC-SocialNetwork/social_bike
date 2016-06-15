@@ -1,0 +1,19 @@
+<%= form_tag(action: :check_routes) do %>
+
+  <div class="field">
+    <%= label_tag :my_route %><br />
+    <%= select_tag :my_route, options_from_collection_for_select(@routes, "id", "title") %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :my_friend %><br />
+    <%= select_tag :my_friend, options_from_collection_for_select(@friends, "id", "username"), prompt: "Selecione um amigo" %>
+  </div>
+  <div id="friend_routes_div">
+    <%= render partial: "friend_routes", object: @friend_routes %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag("Comparar") %>
+  </div>
+<% end %>
