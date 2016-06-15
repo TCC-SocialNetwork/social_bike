@@ -11,15 +11,24 @@ class RoutesController < ApplicationController
       point[:latitude] = point[:latitude].to_f
       point[:longitude] = point[:longitude].to_f
     end
-
-    if current_user.create_route(params[:title], params[:distance], points, params[:travel_mode])
-      redirect_to root_url
+    
+    route = current_user.create_route(params[:title], params[:distance], points, params[:travel_mode])
+    
+    if route 
+      redirect_to route_url(route)
     else
       render :new
     end
   end
 
   def show
+    @origin = @route.locations.first
+    @destination = @route.locations.last
+    @mode_of_travel = @route.mode_of_travel
+    puts "**********************************"
+    puts @mode_of_travel
+    puts "**********************************"
+    @locations = []
   end
 
   private

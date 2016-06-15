@@ -1,0 +1,11 @@
+<h1>Rota <%= @route.title %></h1>
+<div id="map" class="show_route" style="height: 500px; width: 800px"></div>
+
+<%= content_tag :div, class: "travel", data: {travel: @mode_of_travel} do %>
+<% end %>
+<%= content_tag :div, class: "origin", data: {origin: @origin} do %>
+<% end %>
+<%= content_tag :div, class: "destination", data: {destination: @destination} do %>
+<% end %>
+<%= content_tag :div, class: "locations", data: {locations: @locations} do %>
+<% end %>
