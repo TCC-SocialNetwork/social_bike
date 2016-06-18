@@ -89,8 +89,6 @@ function getModeOfTravel(modeOfTravel){
   return travelMode;
 }
 
-initialize();
-
 if($("#map").hasClass("show_route")){
   var locations = $('.locations').data('locations');
   var origin = $('.origin').data('origin');
@@ -113,3 +111,7 @@ $("#my_friend").change(function(){
     }
   });
 });
+
+if(document.getElementById("map")){
+  initialize();
+}
