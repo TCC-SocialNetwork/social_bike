@@ -1,50 +1,63 @@
+<div class="container" align="center">
+<h1>Verificar Melhor Horário</h1>
+<br>
+</div>
 <%= form_tag(action: :availabilities_timetables) do %>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @friends.each do |friend| %>
-      <tr>
-        <td><%= check_box_tag "friends[]", friend.id %></td>
-        <td><%= label_tag "friends[]", friend.name %></td>
-
-        <td><%= label_tag :weight, "Peso: " %></td>
-        <td><%= select_tag "weights[#{friend.id}]", options_for_select([ "", "1", "2", "3", "Fixo"]) %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <div class="field">
-    <%= label_tag :start_day %><br />
-    <%= date_field_tag :start_day %>
+  <div class="panel panel-default col-md-6" align="center">
+    <div class="panel-heading bold title" align="center">Amigos</div>
+      <table class="table table-striped">
+        <thead class="bold" align="center">
+          <tr>
+            <td>Verificar</td>
+            <td>Nome</td>
+            <td>Peso</td>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <% @friends.each do |friend| %>
+          <tr>
+            <td><%= check_box_tag "friends[]", friend.id %></td>
+            <td><%= label_tag "friends[]", friend.name %></td>
+            <td><%= select_tag "weights[#{friend.id}]", options_for_select([ "", "1", "2", "3", "Fixo"]) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="field">
-    <%= label_tag :finish_day %><br />
-    <%= date_field_tag :finish_day %>
+  <div class="col-md-6">
+    <div class="field">
+      <%= label_tag :start_day, "Dia de Início" %>
+      <%= date_field_tag :start_day, nil, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :finish_day, "Dia de Fim" %>
+      <%= date_field_tag :finish_day, nil, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :start_hour, "Hora de Início" %>
+      <%= time_field_tag :start_hour, nil, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :finish_hour, "Hora de Fim" %>
+      <%= time_field_tag :finish_hour, nil, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :slots_size, "Duração do Evento" %>
+      <%= number_field_tag :slots_size, nil, class: "form-control", placeholder: "60" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= label_tag :start_hour %><br />
-    <%= time_field_tag :start_hour %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :finish_hour %><br />
-    <%= time_field_tag :finish_hour %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :slots_size, "Duração:" %><br />
-    <%= number_field_tag :slots_size %>
-  </div>
-
-  <div class="actions">
-    <%= submit_tag("Verificar") %>
+  <br>
+  <div class="actions col-md-12" align="center">
+    <%= button_tag class: "btn btn-primary" do %>
+      <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Verificar
+    <% end %>
   </div>
 
 <% end %>

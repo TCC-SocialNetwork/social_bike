@@ -2,7 +2,7 @@
 <h1>Novo Evento</h1>
 <%= form_tag(action: :create) do %>
   <div class="field">
-    <%= label_tag :title, "Título" %>:
+    <%= label_tag :title, "Título" %>
     <%= text_field_tag :title, nil, class: "form-control", placeholder: "Título" %>
   </div>
 
@@ -33,3 +33,4 @@
     <% end %>
   </div>
 <% end %>
+</div>

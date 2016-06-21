@@ -1,5 +1,7 @@
-<h1>Rota <%= @route.title %></h1>
-<div id="map" class="show_route" style="height: 500px; width: 800px"></div>
+<div class="container">
+  <h1 align="center">Rota: <%= @route.title %></h1>
+  <div id="map" class="show_route" style="height: 500px; width: 800px; margin-left:auto; margin-right:auto;"></div>
+</div>
 
 <%= content_tag :div, class: "travel", data: {travel: @mode_of_travel} do %>
 <% end %>

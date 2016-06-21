@@ -1,19 +1,26 @@
 <%= form_tag(action: :check_routes) do %>
 
-  <div class="field">
-    <%= label_tag :my_route %><br />
-    <%= select_tag :my_route, options_from_collection_for_select(@routes, "id", "title") %>
-  </div>
+  <div class="container text_field_weight">
+    <h1 align="center">Comparar Rotas</h1>
+    <div class="field">
+      <%= label_tag :my_route, "Minha Rota" %>
+      <%= select_tag :my_route, options_from_collection_for_select(@routes, "id", "title"){}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :my_friend %><br />
-    <%= select_tag :my_friend, options_from_collection_for_select(@friends, "id", "username"), prompt: "Selecione um amigo" %>
-  </div>
-  <div id="friend_routes_div">
-    <%= render partial: "friend_routes", object: @friend_routes %>
-  </div>
+    <div class="field">
+      <%= label_tag :my_friend, "Amigo" %>
+      <%= select_tag :my_friend, options_from_collection_for_select(@friends, "id", "name"){}, {required: 'true', class: 'form-control', prompt: "Selecione um amigo"} %>
+    </div>
 
-  <div class="actions">
-    <%= submit_tag("Comparar") %>
+    <div id="friend_routes_div">
+      <%= render partial: "friend_routes", object: @friend_routes %>
+    </div>
+
+    <br>
+    <div class="actions" align="center">
+      <%= button_tag class: "btn btn-primary" do %>
+        <span class="glyphicon glyphicon-adjust" aria-hidden="true"></span> Comparar
+      <% end %>
+    </div>
   </div>
 <% end %>

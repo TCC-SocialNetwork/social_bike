@@ -1,14 +1,24 @@
-<h1>Possíveis horários para o período requerido</h1>
 <% unless @slots.nil? or @slots.empty? %>
-<table>
-  <tbody>
-    <% @slots.each do |slot| %>
-      <tr>
-        <td><%= slot.id %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="panel panel-default container text_field_weight">
+    <div class="panel-heading bold title" align="center">Possíveis horários</div>
+      <table class="table table-striped">
+        <thead class="bold" align="center">
+          <tr>
+            <td>Horários</td>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <% @slots.each do |slot| %>
+            <tr>
+              <td><%= slot.id.to_formatted_s(:long) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% else %>
-	<h1>Nenhum horário encontrado!</h1>
+  <div class="container" align="center">
+    <h1>Nenhum horário encontrado!</h1>
+  </div>
 <% end %>

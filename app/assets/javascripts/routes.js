@@ -32,9 +32,6 @@ $('#view_route').click(function() {
 
   var waypoints = [];
   var result = request_map(origin, destination, travelMode, waypoints, callback_to_create)
-  console.log("Antes")
-  console.log(result)
-  
 });
 
 function request_map(origin, destination, travelMode, waypoints, callback){
@@ -89,17 +86,6 @@ function getModeOfTravel(modeOfTravel){
   return travelMode;
 }
 
-if($("#map").hasClass("show_route")){
-  var locations = $('.locations').data('locations');
-  var origin = $('.origin').data('origin');
-  origin = origin.latitude + ", " + origin.longitude
-  var destination = $('.destination').data('destination');
-  destination = destination.latitude + ", " + destination.longitude
-  var travelMode = getModeOfTravel($('.travel').data('travel'));
-
-  request_map(origin, destination, travelMode, locations, callback)
-}
-
 $("#my_friend").change(function(){
   $.ajax({
     url: "/friend_routes",
@@ -114,4 +100,15 @@ $("#my_friend").change(function(){
 
 if(document.getElementById("map")){
   initialize();
+  
+  if($("#map").hasClass("show_route")){
+    var locations = $('.locations').data('locations');
+    var origin = $('.origin').data('origin');
+    origin = origin.latitude + ", " + origin.longitude
+    var destination = $('.destination').data('destination');
+    destination = destination.latitude + ", " + destination.longitude
+    var travelMode = getModeOfTravel($('.travel').data('travel'));
+
+    request_map(origin, destination, travelMode, locations, callback)
+  }
 }

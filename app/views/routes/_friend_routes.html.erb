@@ -1,4 +1,4 @@
 <div class="field">
-  <%= label_tag :my_friend_route %><br />
-  <%= select_tag :my_friend_route, options_from_collection_for_select(@friend_routes, "id", "title") %>
+  <%= label_tag :my_friend_route, "Rota do meu Amigo"%>
+  <%= select_tag :my_friend_route, options_from_collection_for_select(@friend_routes, "id", "title"){}, {required: 'true', class: 'form-control'} %>
 </div>

@@ -1,32 +1,46 @@
-<%= form_tag(action: :create) do %>
-  <div class="field">
-    <%= label_tag :title %><br />
-    <%= text_field_tag :title, "", autofocus: true %>
-  </div>
+<div class="container">
+  <h1>Nova Rota</h1>
+  <br>
+  <%= form_tag(action: :create) do %>
+    <div class="field">
+      <%= label_tag :title, "Título" %>
+      <%= text_field_tag :title, nil, class: "form-control", placeholder: "Título", autofocus: true %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :origin %><br />
-    <%= text_field_tag :origin, "-15.797780000000001,-47.866920000000007" %>
-  </div>
+    <div class="field">
+      <%= label_tag :origin, "Origem" %>
+      <%= text_field_tag :origin, nil, class: "form-control", placeholder: "fga, gama" %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :destination %><br />
-    <%= text_field_tag :destination, "-15.795020000000001,-47.875680000000003" %>
-  </div>
+    <div class="field">
+      <%= label_tag :destination, "Destino" %>
+      <%= text_field_tag :destination, nil, class: "form-control", placeholder: "unb" %>
+    </div>
+    <br>
 
-  <div class="field">
-    <%= label_tag :travel_mode %><br />
-    <%= select_tag :travel_mode, options_for_select([ "Bicicleta", "A Pé", "Carro", "Transporte Público"]) %>
-  </div>
+    <div class="field">
+      <%= label_tag :travel_mode, "Modo de transporte" %>
+      <%= select_tag :travel_mode, options_for_select([ "Bicicleta", "A Pé", "Carro", "Transporte Público"]) %>
+    </div>
 
-  <%= hidden_field_tag :distance %>
-  <%= hidden_field_tag :points %>
+    <%= hidden_field_tag :distance %>
+    <%= hidden_field_tag :points %>
 
-  <a href="#" id="view_route">Visualizar</a>
-
-  <div class="actions">
-    <%= submit_tag("Salvar", id: 'save') %>
-  </div>
-<% end %>
-
-<div id="map" style="height: 500px; width: 800px"></div>
+    <div align="center">
+      <a href="#" id="view_route" class="btn btn-primary" align="center">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+        Visualizar
+      </a>
+    </div>
+    <br>
+    <div id="map" style="height: 500px; width: 800px; margin-left:auto; margin-right:auto;"></div>
+    <br>
+    <div class="actions" align="center">
+      <%= button_tag id: 'save', class: "btn btn-success" do %>
+      <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Salvar
+    <% end %>
+    </div>
+    <br>
+    <br>
+  <% end %>
+</div>
