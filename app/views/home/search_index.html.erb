@@ -1,0 +1,61 @@
+<% unless @users.nil? or @users.empty? %>
+<div class="panel panel-default container">
+  <div class="panel-heading bold title" align="center">Usuários encontrados</div>
+    <table class="table table-striped">
+      <thead class="bold" align="center">
+        <tr>
+          <td>Nome</td>
+          <td>Nome de Usuário</td>
+          <td>E-mail</td>
+          <td>Visualizar</td>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to user_registration_path(user), class: "btn btn-info" do %>
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% end %>
+
+<% unless @events.nil? or @events.empty? %>
+<div class="panel panel-default container">
+  <div class="panel-heading bold title" align="center">Eventos Encontrados</div>
+    <table class="table table-striped">
+      <thead class="bold" align="center">
+        <tr>
+          <td>Título</td>
+          <td>Início</td>
+          <td>Fim</td>
+          <td>Visualizar</td>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.title %></td>
+            <td><%= event.start %></td>
+            <td><%= event.finish %></td>
+            <td>
+              <%= link_to event_path(event), class: "btn btn-info" do %>
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% end %>

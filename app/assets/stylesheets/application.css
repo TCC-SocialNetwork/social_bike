@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+.bold {
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
+.text_field_weight {
+  width: 30%;
+};

@@ -1,70 +1,163 @@
-<p id="notice"><%= notice %></p>
-<p id="alert"><%= alert %></p>
-
-<p>
-  <strong>String:</strong>
-  <%= @event.title %>
-</p>
-
-<% if @is_invited %>
-  <%= link_to "Aceitar Convite", accept_invitation_path(@event), method: :post %>
-<% elsif not @is_in_event %>
-  <%= link_to "Entrar", enter_in_event_path(@event), method: :post %>
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
 <% end %>
 
+<% if alert %>
+<div class="alert alert-danger" role="alert">
+  <p id="alert"><%= alert %></p>
+</div>
+<% end %>
+
+<div class="container">
+  <h1>Visualizar Evento</h1>
+  
+  <p>
+    <strong>Título:</strong>
+    <%= @event.title %><br>
+    <strong>Descrição:</strong>
+    <%= @event.description %><br>
+    <strong>Início:</strong>
+    <%= @event.start %><br>
+    <strong>Fim:</strong>
+    <%= @event.finish %><br>
+  </p>
+
+  <% if @is_invited %>
+    <%= link_to accept_invitation_path(@event), method: :post, class: "btn btn-success" do %>
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Aceitar Convite
+    <% end %>
+  <% elsif not @is_in_event %>
+    <%= link_to enter_in_event_path(@event), method: :post, class: "btn btn-success" do %>
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Entrar
+    <% end %>
+  <% end %>
+</div>
+
 <% unless @administrators.nil? or @administrators.empty? %>
-  <h1>Administradores</h1>
-  <table>
-    <tbody>
-      <% @administrators.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= link_to 'Remover', remove_participant_path(@event, user), method: :post %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="panel panel-default container">
+    <div class="panel-heading bold title" align="center">Administradores</div>
+      <table class="table table-striped">
+        <thead class="bold" align="center">
+          <tr>
+            <td>Nome</td>
+            <td>Nome de Usuário</td>
+            <td>E-mail</td>
+            <td>Remover Adm</td>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <% @administrators.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td>
+                <%= link_to remove_participant_path(@event, user), method: :post, class: "btn btn-danger" do %>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% end %>
 
 <% unless @confirmed_users.nil? or @confirmed_users.empty? %>
-  <h1>Participantes</h1>
-  <table>
-    <tbody>
-      <% @confirmed_users.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= link_to 'Remover', remove_participant_path(@event, user), method: :post %></td>
-          <td><%= link_to 'Tornar Administrador', make_admin_path(@event, user), method: :post %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="panel panel-default container">
+    <div class="panel-heading bold title" align="center">Participantes</div>
+      <table class="table table-striped">
+        <thead class="bold" align="center">
+          <tr>
+            <td>Nome</td>
+            <td>Nome de Usuário</td>
+            <td>E-mail</td>
+            <td>Remover/Tornar Adm</td>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <% @confirmed_users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td>
+                <%= link_to remove_participant_path(@event, user), method: :post, class: "btn btn-danger" do %>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <% end %>
+                <%= link_to make_admin_path(@event, user), method: :post, class: "btn btn-primary" do %>
+                  <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% end %>
 
 <% unless @not_confirmed_users.nil? or @not_confirmed_users.empty? %>
-  <h1>Aguardando confirmação</h1>
-  <table>
-    <tbody>
-      <% @not_confirmed_users.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= link_to 'Remover', remove_participant_path(@event, user), method: :post %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="panel panel-default container">
+    <div class="panel-heading bold title" align="center">Aguardando Confirmação</div>
+      <table class="table table-striped">
+        <thead class="bold" align="center">
+          <tr>
+            <td>Nome</td>
+            <td>Nome de Usuário</td>
+            <td>E-mail</td>
+            <td>Remover</td>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <% @not_confirmed_users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td>
+                <%= link_to remove_participant_path(@event, user), method: :post, class: "btn btn-danger" do %>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% end %>
 
 <% unless @friends.nil? or @friends.empty? %>
-  <h1>Convidar Amigos</h1>
-  <table>
-    <tbody>
-      <% @friends.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= link_to 'Convidar', invite_path(@event, user), method: :post %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="panel panel-default container">
+    <div class="panel-heading bold title" align="center">Convidar Amigos</div>
+      <table class="table table-striped">
+        <thead class="bold" align="center">
+          <tr>
+            <td>Nome</td>
+            <td>Nome de Usuário</td>
+            <td>E-mail</td>
+            <td>Convidar</td>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <% @friends.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td>
+                <%= link_to invite_path(@event, user), method: :post, class: "btn btn-success" do %>
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% end %>

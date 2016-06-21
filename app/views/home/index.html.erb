@@ -1,101 +1,181 @@
-<% unless @users.nil? or @users.empty? %>
-<h1>Usuários</h1>
-<table>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Amigo', add_friend_path(user), method: :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div align="center">
+  <%= link_to edit_user_registration_path, method: :post, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Atualizar meus dados
+  <% end %>
+
+  <%= link_to new_event_path, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Criar Evento
+  <% end %>
+
+  <%= link_to best_timetable_path, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Verificar Melhor Horário
+  <% end %>
+
+  <%= link_to new_route_path, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Criar Rota
+  <% end %>
+
+  <%= link_to compare_routes_path, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-random" aria-hidden="true"></span> Comparar Rotas
+  <% end %>
+  <br>
+  <br>
+</div>
+
+<% unless @friends.nil? or @friends.empty? %>
+<div class="panel panel-default container">
+  <div class="panel-heading bold title" align="center">Seus Amigos</div>
+    <table class="table table-striped">
+      <thead class="bold" align="center">
+        <tr>
+          <td>Nome</td>
+          <td>Nome de Usuário</td>
+          <td>E-mail</td>
+          <td>Remover Amizade</td>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <% @friends.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to remove_friend_path(user), method: :post, class: "btn btn-danger" do %>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <% end %>
 
 <% unless @events.nil? or @events.empty? %>
-<h1>Eventos</h1>
-<table>
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.title %></td>
-        <td><%= link_to "Ver", event_path(event) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<% end %>
-
-<% unless @friends.nil? or @friends.empty? %>
-<h1>Amigos</h1>
-<table>
-  <tbody>
-    <% @friends.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Remover Amigo', remove_friend_path(user), method: :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="panel panel-default container">
+  <div class="panel-heading bold title" align="center">Seus Eventos</div>
+    <table class="table table-striped">
+      <thead class="bold" align="center">
+        <tr>
+          <td>Título</td>
+          <td>Início</td>
+          <td>Fim</td>
+          <td>Visualizar</td>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.title %></td>
+            <td><%= event.start %></td>
+            <td><%= event.finish %></td>
+            <td>
+              <%= link_to event_path(event), class: "btn btn-info" do %>
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <% end %>
 
 <% unless @requests_friendship.nil? or @requests_friendship.empty? %>
-<h1>Pedidos de Amizade</h1>
-<table>
-  <tbody>
-    <% @requests_friendship.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Aceitar', accept_friend_path(user), method: :post %></td>
-        <td><%= link_to 'Recusar', remove_friend_path(user), method: :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="panel panel-default container">
+  <div class="panel-heading bold title" align="center">Pedidos de Amizade</div>
+    <table class="table table-striped">
+      <thead class="bold" align="center">
+        <tr>
+          <td>Nome</td>
+          <td>Nome de Usuário</td>
+          <td>E-mail</td>
+          <td>Confirmar/Recusar</td>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <% @requests_friendship.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to accept_friend_path(user), method: :post, class: "btn btn-success" do %>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              <% end %>
+              <%= link_to remove_friend_path(user), method: :post, class: "btn btn-danger" do %>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <% end %>
 
 <% unless @requests_open.nil? or @requests_open.empty? %>
-<h1>Aguardando aceitação</h1>
-<table>
-  <tbody>
-    <% @requests_open.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Cancelar', remove_friend_path(user), method: :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="panel panel-default container">
+  <div class="panel-heading bold title" align="center">Aguardando Confirmação</div>
+    <table class="table table-striped">
+      <thead class="bold" align="center">
+        <tr>
+          <td>Nome</td>
+          <td>Nome de Usuário</td>
+          <td>E-mail</td>
+          <td>Cancelar</td>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <% @requests_open.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to remove_friend_path(user), method: :post, class: "btn btn-danger" do %>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <% end %>
 
 <% unless @friends_suggest.nil? or @friends_suggest.empty? %>
-<h1>Sugeridos</h1>
-<table>
-  <tbody>
-    <% @friends_suggest.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Amigo', add_friend_path(user), method: :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="panel panel-default container">
+  <div class="panel-heading bold title" align="center">Sugestão de amizade</div>
+    <table class="table table-striped">
+      <thead class="bold" align="center">
+        <tr>
+          <td>Nome</td>
+          <td>Nome de Usuário</td>
+          <td>E-mail</td>
+          <td>Adicionar</td>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <% @friends_suggest.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to add_friend_path(user), method: :post, class: "btn btn-success" do %>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <% end %>
-
-<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
-<%= link_to "Atualizar", edit_user_registration_path %>
-<%= link_to "Criar Evento", new_event_path %>
-<%= link_to "Melhor horário", best_timetable_path %>
-<%= link_to "Criar Rota", new_route_path %>
-<%= link_to "Comparar Rotas", compare_routes_path %>
