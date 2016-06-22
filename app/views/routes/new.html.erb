@@ -16,11 +16,22 @@
       <%= label_tag :destination, "Destino" %>
       <%= text_field_tag :destination, nil, class: "form-control", placeholder: "unb" %>
     </div>
+
+    <div class="field">
+      <%= label_tag :deviation, "Desvio" %>
+      <%= text_field_tag :deviation, nil, class: "form-control", placeholder: "Desvio para comparação de rotas" %>
+    </div>
     <br>
 
     <div class="field">
       <%= label_tag :travel_mode, "Modo de transporte" %>
-      <%= select_tag :travel_mode, options_for_select([ "Bicicleta", "A Pé", "Carro", "Transporte Público"]) %>
+      <select id="travel_mode" name="travel_mode" class="form-control">
+        <option value="bicycling">Bicicleta</option>
+        <option value="walking">A Pé</option>
+        <option value="driving">Carro</option>
+        <option value="transit">Transporte Público</option>
+      </select>
+      <br />
     </div>
 
     <%= hidden_field_tag :distance %>

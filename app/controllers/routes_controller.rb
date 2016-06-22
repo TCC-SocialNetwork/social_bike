@@ -12,7 +12,8 @@ class RoutesController < ApplicationController
       point[:longitude] = point[:longitude].to_f
     end
     
-    route = current_user.create_route(params[:title], params[:distance], points, params[:travel_mode])
+    route = current_user.create_route(params[:title], params[:distance], points,
+                                      params[:travel_mode], params[:deviation])
     
     if route 
       redirect_to route_url(route)
