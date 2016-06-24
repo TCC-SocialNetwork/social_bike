@@ -17,7 +17,10 @@ class EventsController < ApplicationController
 
   # GET /foos/new
   def new
-    @event = SocialFramework::Event.new
+    @event = SocialFramework::Event.new()
+    @start = params[:start]
+    @duration = params[:duration]
+    @users = params[:users]
   end
 
   def create
@@ -28,6 +31,12 @@ class EventsController < ApplicationController
     event = current_user.schedule.create_event(params[:title], start, duration, params[:description], particular)
     
     if event
+      users = params[:users]
+      unless users.nil?
+        users.split(" ").each do |id|
+          event.invite current_user, SocialFramework::User.find(id)
+        end
+      end
       redirect_to event_url(event)
     else
       render :create

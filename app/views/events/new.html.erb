@@ -1,6 +1,8 @@
 <div class="container">
 <h1>Novo Evento</h1>
 <%= form_tag(action: :create) do %>
+  <%= hidden_field_tag "users", @users %>
+
   <div class="field">
     <%= label_tag :title, "Título" %>
     <%= text_field_tag :title, nil, class: "form-control", placeholder: "Título" %>
@@ -13,12 +15,12 @@
 
   <div class="field">
     <%= label_tag :start, "Início" %>
-    <%= datetime_field_tag :start, nil, class: "form-control", placeholder: "Início" %>
+    <%= datetime_field_tag :start, nil, class: "form-control", placeholder: "Início", value: @start %>
   </div>
 
   <div class="field">
     <%= label_tag :duration, "Duração" %>
-    <%= number_field_tag :duration, nil, class: "form-control", placeholder: "Duração" %>
+    <%= number_field_tag :duration, nil, class: "form-control", placeholder: "Duração", value: @duration %>
   </div>
 
   <div class="field">

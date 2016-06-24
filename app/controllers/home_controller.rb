@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    current_user.graph.build(current_user)
     @events = current_user.schedule.events
     @friends = current_user.relationships("friend")
     @friends_suggest = current_user.graph.suggest_relationships("friend")
@@ -27,11 +28,7 @@ class HomeController < ApplicationController
 
     @users = hash[:users]
     @events = hash[:events]
-    puts "****************************"
-    puts hash[:events].count
-    puts @events.count
-    puts "****************************"
-
+    
     render :search_index
   end
 

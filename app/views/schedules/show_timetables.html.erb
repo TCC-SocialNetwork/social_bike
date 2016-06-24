@@ -5,12 +5,21 @@
         <thead class="bold" align="center">
           <tr>
             <td>Horários</td>
+            <td>Marcar</td>
           </tr>
         </thead>
         <tbody align="center">
           <% @slots.each do |slot| %>
             <tr>
               <td><%= slot.id.to_formatted_s(:long) %></td>
+              <td>
+                <% duration = slot.attributes[:duration].to_i / 60 %>
+                <% users = [] %>
+                <% slot.edges.each {|e| users << e.destiny.id } %>
+                <%= link_to new_event_path(start: slot.id.to_s(:db), duration: duration, users: users), slot: slot, class: "btn btn-success" do %>
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
