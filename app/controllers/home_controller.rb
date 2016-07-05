@@ -18,7 +18,7 @@ class HomeController < ApplicationController
 
   def search
     @search = params[:search]
-    map = { username: @search, email: @search, title: @search }
+    map = { name: @search, username: @search, email: @search, title: @search }
 
     if params[:commit] == 'Continuar'
       hash = current_user.graph.search(map, true)

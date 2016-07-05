@@ -7,7 +7,7 @@ SocialFramework.setup do |config|
   # Define the attributes to build vertex in network graph,
   # That attributes must exist in User or Event classes,
   # Are used to search elements in graph
-  # config.attributes_to_build_graph = [:username, :email, :title]
+  config.attributes_to_build_graph = [:name, :username, :email, :title]
 
   # Define the quantity of users to search returns
   # config.elements_number_to_search = 5
